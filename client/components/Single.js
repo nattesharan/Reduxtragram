@@ -1,23 +1,22 @@
-import React from 'react';
-import Photo from './Photo';
-import Comments from './Comments';
+import React, {Component} from 'react';
+import Photo from './Photo'
+import { Link } from 'react-router';
+import Comments from './Comments'
 
-const Single = React.createClass({
+class Single extends Component {
   render() {
-    const { postId } = this.props.params;
-
-    const i = this.props.posts.findIndex((post) => post.code === postId);
+    const i = this.props.posts.findIndex((post) => post.code === this.props.params.postId);
     const post = this.props.posts[i];
-
-    const postComments = this.props.comments[postId] || [];
+    const postComments = this.props.comments[this.props.params.postId] || [];
 
     return (
       <div className="single-photo">
         <Photo i={i} post={post} {...this.props} />
-        <Comments postComments={postComments} {...this.props} />
+        <Comments postComments={postComments} {...this.props}/>
       </div>
-    )
+    );
   }
-});
+}
+
 
 export default Single;
